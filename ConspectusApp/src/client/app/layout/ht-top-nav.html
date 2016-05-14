@@ -1,0 +1,20 @@
+<header class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="btn btn-default navbar-btn navbar-left" ng-click="vmNav.sidebar.sidebarToggle(vmNav.sidebar.visible)">
+                <span class="fa fa-bars"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                КОТСПЕКТ
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-class="vmNav.isCurrent('/')"><a href="/dashboard">Save to PDF</a></li>
+                <li><a>Ann Vasko</a></li>
+                <li ng-class="vmNav.isCurrent('/')"><a href="/dashboard">Log Out</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</header>

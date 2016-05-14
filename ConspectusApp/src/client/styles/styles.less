@@ -1,0 +1,442 @@
+
+/* Adding Open Sans */
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/fonts/OpenSans-Regular-webfont.eot');
+    src: url('/fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/OpenSans-Regular-webfont.woff') format('woff'),
+    url('/fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+    url('/fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@color_lightblue: #52b9e9;
+@color_blue: #1171a3;
+@color_success: #43c83c;
+@color_warning: #f88529;
+@color_important: #fa3031;
+@color_violet: #932ab6;
+@color_lightblue2: #D9EDF7;
+@color_dark_gray1: #111;
+@color_dark_gray2: #222;
+@color_dark_gray3: #333;
+@color_dark_gray4: #444;
+@color_gray5: #e6e6e6;
+@color_gray: #666;
+@color_gray2: #999;
+@color_gray3: #888;
+@color_gray4: #ccc;
+@color_white: #fff;
+@color_gray_white: #ddd;
+@color_white-gray: #eee;
+@color_siderbar_inner: #f5f5f5;
+@border-width: 1px;
+@border-style: solid;
+@main-font: 'Open Sans', Arial, Helvetica, sans-serif;
+@main-font-size: 13px;
+@block: block;
+
+.transition-properties(@transition-property:background; @transition-duration:0.5;
+@transition-timing-function: ease) {
+    -webkit-transition: @arguments;
+    -moz-transition: @arguments;
+    -o-transition: @arguments;
+    transition: @arguments;
+}
+
+
+
+* {
+    /*-webkit-box-shadow: none !important;
+    -ms-box-shadow: none !important;
+    box-shadow: none !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false) !important;
+    -webkit-text-shadow: none !important;
+    -ms-text-shadow: none !important;
+    text-shadow: none !important;*/
+    font-family: @main-font;
+    -webkit-font-smoothing: antialiased;
+    /*font-weight: 400;*/
+
+    &:focus {
+        outline: none !important;
+    }
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-size: @main-font-size;
+    font-family: @main-font;
+    line-height: 1.25;
+    color: @color_gray;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+body > div {
+    min-height: 100%;
+    overflow: auto;
+    padding-top: 54px;
+    padding-bottom: 50px;
+    position: relative;
+}
+
+a.fa {
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+/* Header */
+
+header {
+    font-size: 120%;
+}
+
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    color: #000;
+
+    > .container, .container-fluid {
+        .navbar-brand {
+            margin-left: 10px;
+        }
+    }
+}
+
+
+
+/* Sidebar */
+
+.shell-wrapper {
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 230px;
+    background: @color_dark_gray2;
+    color: @color_white-gray;
+    position: fixed;
+    top: 54px;
+    bottom: 0;
+    left: -230px;
+    transition: all 0.3s linear;
+
+    .sidebar-visible & {
+        left: 0;
+    }
+
+    .sidebar-inner {
+        height: 100%;
+        overflow: auto;
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+
+        > li {
+            > a {
+                list-style-type: none;
+                display: @block;
+                padding: 12px 20px;
+                font-size: @main-font-size + 2;
+                line-height: 1.25;
+                color: @color_white;
+                text-decoration: none;
+                border-bottom: @border-width @border-style @color_dark_gray1;
+                background-color: @color_dark_gray2;
+                &:hover {
+                    border-bottom: @border-width @border-style @color_dark_gray1;
+                    background-color: @color_dark_gray2;
+                    color: @color_white;
+                }
+            }
+
+            &.open {
+                > a {
+                    border-bottom: @border-width @border-style @color_dark_gray1;
+                    background-color: @color_dark_gray2;
+                    color: @color_white;
+                }
+            }
+        }
+    }
+
+    .sidebar-widget {
+        padding: 10px 5px;
+    }
+
+    .ui-datepicker {
+        width: 95%;
+        margin: 0 auto;
+        background: @color_dark_gray1;
+        color: @color_gray3;
+        border: 0;
+        padding: 0;
+
+        &-header {
+            background: @color_dark_gray2;
+            border: @border-width @border-style @color_dark_gray2;
+        }
+
+        &-prev {
+            &:hover {
+                background: transparent;
+                border: 0;
+                top: @border-width * 2 !important;
+                left: @border-width * 2 !important;
+            }
+        }
+
+        &-next {
+            &:hover {
+                background: transparent;
+                border: 0;
+                top: @border-width * 2 !important;
+                right: @border-width * 2 !important;
+            }
+        }
+    }
+}
+
+
+/* Main */
+
+.mainbar {
+    position: relative;
+    left: 0;
+    margin-right: 0;
+    transition: all 0.3s linear;
+
+    .sidebar-visible & {
+        left: 230px;
+    }
+}
+
+.matter {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: auto;
+}
+
+/*#endregion */
+
+/* Add project modal */
+
+.marg-top {
+    margin-top: 10px;
+}
+
+/* endregion */
+
+/* Color for selected row */
+.selected-row {
+    background: @color_lightblue2 !important;
+}
+
+/* Styles of tabs for Runs execute and Runs edit pages */
+.tabsSelected{
+    color: black;
+    background-color: @color_gray5;
+}
+
+.tabsNotSelected{
+    background-color: @color_white;
+}
+.tableInput{
+    background-color: transparent;
+    border: none;
+}
+/*Style of suite lists on the runs-execute page*/
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    &:first-child{
+        border-top: none;
+    }
+    &:last-child{
+        border-bottom: none;
+    }
+}
+.list-group-item-test {
+    padding-left: 3em;
+}
+.list-item-suite-selected{
+    font-weight: bold;
+    background-color: @color_siderbar_inner;
+}
+.list-item-test-selected{
+    background-color: @color_siderbar_inner;
+}
+
+//---------landing styles---------//
+
+.wrapper-first {
+    background-size: cover;
+    background-image: url("../images/home.jpg");
+    min-height: 100%;
+    margin-top: -5px;
+}
+
+.wrapper-second {
+    background-image: url("../images/about.jpg");
+    color: #363030;
+    min-height: 100%;
+    background-size: cover;
+}
+
+.wrapper-third {
+    background-image: url("../images/contact.jpg");
+    background-size: cover;
+    min-height: 100%;
+}
+
+
+footer {
+    background-color: #1b1b1b;
+    color: grey;
+    padding: 10px;
+    height:50px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.jumbotron {
+    background: none;
+    color: #fff;
+}
+
+
+.aside {
+    padding: 50px;
+    list-style-type: none;
+    color: #2b669a;
+    margin-right: -20px;
+
+    p {
+        color: #000;
+    }
+
+    li {
+        padding-bottom: 10px;
+    }
+
+}
+
+.about {
+    padding: 50px;
+}
+
+iframe {
+    width: 100%;
+}
+
+//---------end landing styles---------//
+
+//Add defect page
+.errorMessageSpan {
+    color: @color_important;
+    display: block;
+    margin-top: 15px;
+}
+.defectDescription {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+
+//Project sidebar
+.active-project {
+    font-weight: bold;
+}
+.active-project::before {
+    content: "▸ ";
+}
+
+//--------- boards -------------------//
+.gridster-item div[ng-if^="item.board"] {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 54px;
+    bottom: 20px;
+}
+
+.gridster-item chart {
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    width: 100%;
+    //background-color: #f8efc0;
+}
+
+.gridster-item svg {
+    width: 100%;
+    height: 100%;
+}
+
+.gridster-item .edit{
+    color: #000;
+    opacity: 0;
+    font-size: 18px;
+    float: right;
+    cursor: pointer;
+    transition: opacity .3s;
+}
+
+.gridster div[edit-tool] {
+    //opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+//.gridster div[edit-tool]:hover {
+//    opacity: 1;
+//}
+
+.gridster .edit-tool{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    left: 20px;
+    padding: 20px;
+    z-index: 100;
+    opacity: 0.85;
+    overflow: auto;
+}
+
+.gridster .edit-tool form {
+    position: absolute;
+}
+
+.gridster .edit-tool label {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.gridster .edit-tool input {
+    text-align: center;
+}
+
+.blurred {
+    filter: blur(2px) brightness(1.5) grayscale(70%);
+}
+//--------- end boards ---------------//
+.sizeStatus{
+    padding: 0;
+}
