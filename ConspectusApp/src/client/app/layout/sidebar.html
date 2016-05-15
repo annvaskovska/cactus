@@ -1,20 +1,30 @@
 <div class="sidebar">
     <div class="sidebar-inner">
-        <img src="../images/busy.gif" ng-if="!vmSidebar.synchronized"/>
+        <!--<img src="../images/busy.gif" ng-if="!vmSidebar.synchronized"/>-->
         <!--<div  ng-if="vmSidebar.synchronized">-->
+            <div class="searsh-box">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+                </div><!-- /input-group -->
+            </div>
             <ul>
-                <li class="nlightblue fade-selection-animation" ng-repeat="subject in vmSidebar.subjects track by subject.id " >
+                <li class="subject" ng-repeat="subject in vmSidebar.subjects track by subject.id " >
                     <a
                         href="#"
                         id="{{subject.id}}"
-                        ng-class="{'active-project': (subject.id == vmSidebar.currentProjectID)}"
-                        ng-click="isCollapsed = !isCollapsed">
-                        {{subject.name}}
+                        ng-class="{'active-subject': vmSidebar.isActive(subject)}"
+                        ng-click="subject.isCollapsed = !subject.isCollapsed; vmSidebar.updateActiveSubject(subject)">
+                        {{subject.title}}
                     </a>
-                    <ul uib-collapse="isCollapsed">
-                        <li ng-repeat="lecture in subject.lectures track by lecture.id ">
+                    <ul uib-collapse="subject.isCollapsed">
+                        <li class="lecture" ng-repeat="lecture in subject.lectures track by lecture.id ">
                             <a
                                 href='#',
+                                ng-class="{'active-lecture': vmSidebar.isActive(lecture)}"
+                                ng-click="vmSidebar.updateSheet(lecture)"
                                 id='{{lecture.id}}'>
                                 {{lecture.title}}
                             </a>
@@ -23,10 +33,10 @@
                 </li>
             </ul>
 
-            <button class="btn btn-success btn-block" ng-click="vmSidebar.open()" id="btnAddProject">
+            <a class="btn btn-block add-subject" ng-click="vmSidebar.open()" id="btnAddProject">
                 <i class="fa fa-plus"></i>
-                Add subject
-            </button>
+                Add subject folder
+            </a>
         <!--</div>-->
     </div>
 </div>

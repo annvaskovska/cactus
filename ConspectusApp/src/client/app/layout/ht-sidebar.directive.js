@@ -20,69 +20,119 @@
         };
 
         SidebarController.$inject = ['$uibModal', 'logger', 'sidebarFactory', 'authservice', 'createProjectFactory',
-            'user', 'ManageTrelloProject', '$state'];
+            'user', 'ManageTrelloProject', '$state', '$rootScope'];
 
         /* @ngInject */
 
         function SidebarController($uibModal, logger, sidebarFactory, authservice,
-                                   createProjectFactory, user, ManageTrelloProject, $state) {
+                                   createProjectFactory, user, ManageTrelloProject, $state, $rootScope) {
 
             var vm = this;
             vm.open = openModalCreateProject;
             vm.synchronized = false;
+            vm.isActive = isActive;
 
             vm.setCurrentProject = setCurrentProject;
             vm.currentProjectID = user.currentProjectID;
+            vm.updateSheet =  updateSheet;
+            vm.updateActiveSubject = updateActiveSubject;
             vm.subjects = [
                 {
-                    name: 'Subject 1',
+                    title: 'Subject 1',
                     id: 1,
+                    isActive: true,
+                    isCollapsed: false,
                     lectures: [
                         {
                             id: 11,
                             title: 'Lecture 11',
-                            html: 'hello lect 11'
+                            html: '<h2>hello lect 11</h2>',
+                            isActive: true
                         },
                         {
                             id: 12,
                             title: 'Lecture 12',
-                            html: 'hello lect 12'
+                            html: '<h2>hello lect 12</h2>'
                         }
                     ]
                 },{
-                    name: 'Subject 2',
+                    title: 'Subject 2',
                     id: 2,
+                    isCollapsed: true,
                     lectures: [
                         {
-                            id: 11,
-                            title: 'Lecture 11',
+                            id: 21,
+                            title: 'Lecture 21',
                             html: 'hello lect 11'
                         },
                         {
-                            id: 12,
-                            title: 'Lecture 12',
+                            id: 22,
+                            title: 'Lecture 22',
                             html: 'hello lect 12'
                         }
                     ]
                 },
                 {
-                    name: 'Subject 3',
+                    title: 'Subject 3',
                     id: 3,
+                    isCollapsed: true,
                     lectures: [
                         {
-                            id: 11,
-                            title: 'Lecture 11',
+                            id: 31,
+                            title: 'Lecture 31',
                             html: 'hello lect 11'
                         },
                         {
-                            id: 12,
-                            title: 'Lecture 12',
+                            id: 32,
+                            title: 'Lecture 32',
                             html: 'hello lect 12'
                         }
                     ]
                 }
             ];
-            var Trello = authservice.authorize();
+
+            function updateSheet(lecture) {
+                $rootScope.$broadcast('UpdateSheet', {lecture: lecture});
+                updateActiveLeactures(lecture);
+            }
+
+            function updateActiveLeactures(inputLecture) {
+                clearActiveLecture();
+                vm.subjects.forEach(function(subject) {
+                    subject.lectures.forEach(function(lecture) {
+                        if(lecture.id === inputLecture.id) {
+                            lecture.isActive = true;
+                        }
+                    })
+                });
+            }
+
+            function clearActiveLecture() {
+                vm.subjects.forEach(function(subject) {
+                    subject.lectures.forEach(function(lecture) {
+                        lecture.isActive = false;
+                    })
+                });
+            }
+
+            function updateActiveSubject(inputSublect) {
+                clearActiveSublect();
+                vm.subjects.forEach(function(subject) {
+                    if(inputSublect.id === subject.id) {
+                        subject.isCollapsed = false;
+                        subject.isActive = true;
+                    }
+                });
+            }
+
+            function clearActiveSublect() {
+                vm.subjects.forEach(function(subject) {
+                   subject.isCollapsed = true;
+                   subject.isActive = false;
+                });
+            }
+
+            //var Trello = authservice.authorize();
 
             //createProjectFactory.syncProjAndOrg(Trello).then(function (res) {
             sidebarFactory.findProjects().then(function(data) {
@@ -93,6 +143,10 @@
                 vm.synchronized = true;
             });
             //});
+
+            function isActive (lecture) {
+                return lecture.isActive;
+            }
 
             function openModalCreateProject () {
                 var modalCreateProject = $uibModal.open({

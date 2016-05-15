@@ -16,7 +16,7 @@
             {
                 state: 'landing',
                 config: {
-                    templateUrl: 'app/landing/landing.html',
+                    templateUrl: 'app/landing/home.html',
                     controller: 'LandingController',
                     controllerAs: 'vmLanding'
                 }

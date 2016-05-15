@@ -12,7 +12,9 @@
         var vm = this;
         var suitesData;
         var runsData;
+        vm.onlineStatus = true;
         vm.deleteItem = deleteItem;
+        vm.title = 'lalala';
 
         vm.gridsterOpts = {
             margins: [20, 20],
@@ -25,6 +27,14 @@
                 }
             }
         };
+
+        vm.html = '<h1>test text</h1>';
+
+        $scope.$on('UpdateSheet', function(event, args) {
+            vm.html = args.lecture.html;
+            vm.title = args.lecture.title;
+        });
+
 
         activate();
 

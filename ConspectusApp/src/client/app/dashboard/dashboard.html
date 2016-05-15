@@ -3,150 +3,44 @@
         <div class="container-fluid">
 
             <!--Header-->
-            <div class="clearfix">
-                <h1>Here will be your stuff :)</h1>
+            <div class="row info-tab">
+                <div class="col-xs-12">
+                    <div class="col-sm-3 info-tab-item">
+                        <p class="text-center onlineStatus">CURRENTLY WORKING
+                        <span ng-class="vmDashboard.onlineStatus ? 'online' : 'offline'">
+                            {{vmDashboard.onlineStatus ? 'ONLINE' : 'OFFLINE'}}
+                        </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-3 info-tab-item">
+                        <p class="text-center">
+                            <span>LAST EDITED 24 JAN 2016, 16:00</span>
+                        </p>
+                    </div>
+                    <div class="col-sm-2 info-tab-item">
+                        <p class="text-center export-btn">
+                            <a><i class="fa fa-file"></i>EXPORT TO PDF</a>
+                        </p>
+                    </div>
+                    <div class="col-sm-2 info-tab-item">
+                        <p class="text-center save-btn">
+                            <i class="fa fa-floppy-o"></i><span>SAVE</span>
+                        </p>
+                    </div>
+                    <div class="col-sm-2 info-tab-item">
+                        <p class="text-center delete-btn">
+                            <i class="fa fa-trash-o"></i><span>DELETE</span>
+                        </p>
+                    </div>
+                </div>
             </div>
-            <hr>
 
-            <div class="row">
-                Main content
+            <div class="container text-box-area">
+                <div class="row">
+                    <div class="text-angular-box" text-angular ng-model="vmDashboard.html"></div>
+                </div>
             </div>
-            <!--Main content-->
-            <!--<div class="row">-->
-                <!--<div gridster="vmDashboard.gridsterOpts">-->
-                    <!--<div class="panel panel-info" style="overflow: hidden"-->
-                             <!--gridster-item  size-x="item.size.x" size-y="item.size.y"-->
-                             <!--ng-repeat="item in vmDashboard.items" board-resized="board{{$index}}">-->
 
-                            <!--<div class="panel-body">-->
-                                <!--<button type="button" class="close" ng-click="vmDashboard.trigger = item.pos; vmDashboard.deleteItem()">&times;</button>-->
-                                <!--<div class="clearfix">-->
-                                    <!--<h4>{{ item.label }}</h4>-->
-                                <!--</div>-->
-
-                                <!--&lt;!&ndash;project&ndash;&gt;-->
-                                <!--<div ng-if="item.board === 'project' ">-->
-                                    <!--<hr>-->
-                                    <!--<h4> {{ ::item.name }} </h4>-->
-                                    <!--<p> {{ ::item.description }}</p>-->
-                                <!--</div>-->
-
-                                <!--&lt;!&ndash;current run&ndash;&gt;-->
-                                <!--<div ng-if="item.board === 'curRun' ">-->
-                                    <!--<div ng-repeat="feed in item.feed">-->
-                                        <!--<hr>-->
-                                        <!--<div class="clearfix">-->
-                                            <!--<div class="col-md-6">-->
-                                                <!--<a href="#"> {{ ::feed.name }} </a>-->
-                                                <!--<p>-->
-                                                <!--<span class="text-muted"> {{ ::feed.time }} </span>-->
-                                                <!--</p>-->
-                                            <!--</div>-->
-                                            <!--<div class="col-md-6 pull-right">-->
-                                                <!--Progress:-->
-                                                <!--<span class="badge" style="font-size: small"> {{ ::feed.status }} </span>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-
-                                <!--&lt;!&ndash;activity&ndash;&gt;-->
-                                <!--<div ng-if="item.board === 'activity' ">-->
-                                    <!--<div ng-repeat="feed in item.feed">-->
-                                        <!--<hr>-->
-                                        <!--<div class="clearfix">-->
-                                            <!--<div class="media">-->
-                                                <!--<div class="media-left">-->
-                                                    <!--<img width="30" height="30"-->
-                                                         <!--src="https://avatars0.githubusercontent.com/u/5695572?v=3&amp;s=60"-->
-                                                         <!--class="gravatar" alt="@m4ra">-->
-                                                <!--</div>-->
-                                                <!--<div class="media-body">-->
-                                                    <!--<div class="row">-->
-                                                        <!--<div class="col-xs-9">-->
-                                                            <!--<a href="#"><b>{{ ::feed.user }}</b></a> finished <a href="#"><b>run1</b></a>  with status <b class="label label-success">success</b>-->
-                                                        <!--</div>-->
-                                                        <!--<div class="col-xs-3 text-right">-->
-                                                            <!--<time class="small" is="relative-time" datetime="2015-12-08T00:12:10Z" title="8 дек. 2015 г., 2:12 GMT+2">2 days ago</time>-->
-                                                        <!--</div>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-
-                                <!--&lt;!&ndash;tests&ndash;&gt;-->
-                                <!--<div ng-if="item.board === 'tests' ">-->
-                                    <!--<div ng-repeat="feed in item.feed">-->
-                                        <!--<hr>-->
-                                        <!--<div class="clearfix">-->
-                                            <!--<div class="col-md-12">-->
-                                                <!--<a href="#"> {{ ::feed.name }} </a>-->
-                                                <!--created-->
-                                                <!--<br>-->
-                                                <!--<span class="text-muted"> just now </span>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-
-                                <!--&lt;!&ndash;runs&ndash;&gt;-->
-                                <!--<div ng-if="item.board === 'runs' ">-->
-                                    <!--<div ng-repeat="feed in item.feed">-->
-                                        <!--<hr>-->
-                                        <!--<div class="clearfix">-->
-                                            <!--<div class="col-md-8">-->
-                                                <!--<a href="#"> {{ ::feed.name }} </a> <br/>-->
-                                                <!--<span class="text-muted"> 2 days ago </span>-->
-                                            <!--</div>-->
-                                            <!--<div class="col-md-4">-->
-                                                <!--<span class="label label-success label" style="font-size: small"> PASSED </span>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-
-                                <!--&lt;!&ndash;defects&ndash;&gt;-->
-                                <!--<div ng-if="item.board === 'defects' ">-->
-                                    <!--<div ng-repeat="feed in item.feed">-->
-                                        <!--<hr>-->
-                                        <!--<div class="clearfix">-->
-                                            <!--<div class="col-md-2">-->
-                                                <!--<span class="label label-danger"> High </span>-->
-                                            <!--</div>-->
-                                            <!--<div class="col-md-7">-->
-                                                <!--<a href="#"> The Lorem Ipsum Defect </a> <br/>-->
-                                                <!--<span class="text-muted"> 2 days ago </span>-->
-                                            <!--</div>-->
-                                            <!--<div class="col-md-3">-->
-                                                <!--<button class="btn btn-success btn-xs">-->
-                                                    <!--Run &nbsp;-->
-                                                    <!--<i class="fa fa-caret-right"></i>-->
-                                                <!--</button>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-
-                                <!--&lt;!&ndash;statistics&ndash;&gt;-->
-                                <!--<div ng-if="item.board === 'stats' ">-->
-                                    <!--<hr>-->
-                                    <!--<chart type="pie" board="board{{$index}}" array="runs" field="status"></chart>-->
-                                <!--</div>-->
-
-                                <!--&lt;!&ndash;activity statistics&ndash;&gt;-->
-                                <!--<div ng-if="item.board === 'stats_activity' ">-->
-                                    <!--<hr>-->
-                                    <!--<chart type="bar" board="board{{$index}}" array="runs" field="author"></chart>-->
-                                <!--</div>-->
-
-                            <!--</div> &lt;!&ndash;end panel-body&ndash;&gt;-->
-                        <!--</div>&lt;!&ndash;end panel&ndash;&gt;-->
-                <!--</div>&lt;!&ndash;end gridster&ndash;&gt;-->
-            <!--</div> &lt;!&ndash;end row&ndash;&gt;-->
-
-<!--wrapper-->
         </div>
     </div>
 </section>

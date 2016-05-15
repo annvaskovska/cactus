@@ -31,7 +31,7 @@
 
         return {
             authorize: authorize,
-            authorized: true,
+            authorized: undefined,
             deauthorize: deauthorize,
             getMe: getMe
         };

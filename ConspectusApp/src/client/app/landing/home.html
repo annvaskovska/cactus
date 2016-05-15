@@ -1,84 +1,89 @@
-<div class="wrapper-first">
-    <div class="container-fluid ">
-        <div class="row">
-            <div class="col-md-4 jumbotron">
-                <h1>The Brand</h1>
-                <p>&nbsp;by awesome team</p>
-                <hr>
-                <h2>Online Test Case Management System</h2>
-                <p>The Brand helps you manage your software testing efforts and organize your QA department</p>
-                <button type="button" class="btn-lg btn-primary" ui-sref="landing.register">
-                    Getting started &raquo;</button>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
-<div class="wrapper-second" id="about">
+<nav id="navigation" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
-        <div class="row text-center about">
-            <h1>Check out the best test case management tool ever!</h1>
-        </div>
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-rj-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-        <div class="row">
-            <div class="col-md-6 col-lg-5 col-lg-offset-1">
-                <ul class="aside">
-                    <li>
-                        <h4><i class="fa fa-calendar-o fa-2x"></i>&nbsp; Modern Test Management</h4>
-                        <p>Modern test management for your team in a central place.</p>
-                    </li>
-                    <li>
-                        <h4><i class="fa fa-bar-chart fa-2x"></i>&nbsp; Powerful Reports & Metrics</h4>
-                        <p>Actionable reports, metrics and real-time insights.</p>
-                    </li>
-                    <li>
-                        <h4><i class="fa fa-check-square-o fa-2x"></i>&nbsp; Easily Track Results
-                        </h4><p>Execute your tests and track results that matter.</p>
-                    </li>
-                    <li>
-                        <h4><i class="fa fa-users fa-2x"></i>&nbsp; Increased Productivity</h4>
-                        <p>Fast and easy to use for a productive, happy team.</p>
-                    </li>
-                </ul>
+            <a href="#page-top" class="pull-left"><img src="../../images/bg.jpg" style="max-height: 50px"></a>
+        </div>
+        <!-- //.navbar-header -->
+
+        <div class="navbar-collapse collapse" id="navbar-rj-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="page-scroll">
+                    <a href="#who-we-are">About</a>
+                </li>
+
+                <li class="page-scroll">
+                    <a href="#forms">Log in</a>
+                </li>
+
+                <li class="page-scroll">
+                    <a href="#forms">Sign up</a>
+                </li>
+            </ul>
+        </div>
+        <!-- //.navbar-collapse -->
+    </div>
+</nav>
+<section id="intro">
+    <div class="intro-body text-center">
+        <div class="container-fluid intro-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="logo">
+                        <h1>Conspectus Patronum</h1>
+                    </div>
+                    <div class="intro-text text-center">
+                        <h2>Get your notes systemised.</h2>
+
+                        <p class="lead">And, for God's sake, forget about hand-written notes. We are in 21st century.</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                <img class="img-responsive" ng-src="../images/test.png">
+            <div class="row page-scroll">
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <a role="button" class="pull-right" href="#forms">Sign in</a>
+                </div>
+                <div class="col-md-3">
+                    <a role="button" class="pull-left" href="#forms">Sign up</a>
+                </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="wrapper-third" id="contacts">
+</section>
+<section id="forms">
     <div class="container-fluid">
-        <div class="row about">
-            <p></p>
-        </div>
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-2">
-                <img class="img-responsive img-circle" ng-src="../images/cat.jpg">
+            <div class="col-md-6 with-sign-in text-center">
+                <h3>Sign in with existing account</h3>
+                <form class="center-block">
+                    <fieldset>
+                        <input type="text" name="login" value="Nickname"><br>
+                        <input type="text" name="password" value="Password"><br>
+                        <input type="submit" value="Sign in">
+                    </fieldset>
+                </form>
             </div>
-            <div class="col-md-2">
-                <h3>Kot Kotovskii</h3>
-                <p>The Brand CEO</p>
-                <br>
-                <p>Dehtyarivska 33V, Kyiv, Ukraine <br>
-                    <i class="fa fa-phone"></i> 044-777-11-11 <br>
-                    <i class="fa fa-envelope"></i> kotovskii@catmail.com
-                </p>
-
-            </div>
-            <div class="col-md-6 maps">
-                <iframe height="450"
-                        scrolling="no"
-                        frameborder="0" style="border:0; pointer-events: none;"
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAy6bfrlmrpSVBuid11QAKAgwQAgIauUb4
-                            &q=Dehtyarivska 33В, Kiev, Kyiv city" allowfullscreen>
-                </iframe>
+            <div class="col-md-6 with-sign-up text-center">
+                <h3>Not registered yet?</h3>
+                <form class="center-block">
+                    <fieldset>
+                        <input type="text" name="login" value="Nickname"><br>
+                        <input type="text" name="password" value="Password"><br>
+                        <input type="text" name="confirm_password" value="Confirm the password"><br>
+                        <input type="submit" value="Sign up">
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
-</div>
+</section>
+<script src="js/jquery-2.2.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
