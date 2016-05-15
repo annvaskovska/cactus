@@ -16,7 +16,7 @@
         vmLanding.user = user;
 
         function logIn() {
-            user.authorize();
+            user.authorized = true;
             if (user.authorized) {
                 $state.go('dashboard');
             }

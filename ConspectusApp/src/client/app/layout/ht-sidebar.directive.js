@@ -19,13 +19,12 @@
             templateUrl: 'app/layout/sidebar.html'
         };
 
-        SidebarController.$inject = ['$uibModal', 'logger', 'sidebarFactory', 'authservice', 'createProjectFactory',
-            'user', 'ManageTrelloProject', '$state', '$rootScope'];
+        SidebarController.$inject = ['$uibModal', 'logger', 'sidebarFactory',
+            'user', '$state', '$rootScope'];
 
         /* @ngInject */
 
-        function SidebarController($uibModal, logger, sidebarFactory, authservice,
-                                   createProjectFactory, user, ManageTrelloProject, $state, $rootScope) {
+        function SidebarController($uibModal, logger, sidebarFactory, user, $state, $rootScope) {
 
             var vm = this;
             vm.open = openModalCreateProject;

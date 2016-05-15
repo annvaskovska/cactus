@@ -7,7 +7,6 @@
         'app.dashboard',
         'app.layout',
         'app.landing',
-        'app.apis',
         'ngResource'
     ]);
 

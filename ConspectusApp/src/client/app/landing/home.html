@@ -66,8 +66,8 @@
                 <form class="center-block">
                     <fieldset>
                         <input type="text" name="login" placeholder="Nickname" mg-model="vmLanding.nickname"><br>
-                        <input type="text" name="password" placeholder="Password" ng-model="vmLanding.password"><br>
-                        <input type="submit" value="Sign in">
+                        <input type="password" name="password" placeholder="Password" ng-model="vmLanding.password"><br>
+                        <input type="submit" value="Sign in" ng-click="vmLanding.logIn()">
                     </fieldset>
                 </form>
             </div>
@@ -75,9 +75,9 @@
                 <h3>Not registered yet?</h3>
                 <form class="center-block">
                     <fieldset>
-                        <input type="text" name="login" placeholder="Nickname" mg-model="vmLanding.nickname"><br>
-                        <input type="text" name="password" placeholder="Password" ng-model="vmLanding.password"><br>
-                        <input type="text" name="confirm_password" placeholder="Confirm the password" ng-model="vmLanding.passwordConfirm"><br>
+                        <input type="text" name="login_reg" placeholder="Nickname"><br>
+                        <input type="password" name="password_reg" placeholder="Password"><br>
+                        <input type="password" name="confirm_password_reg" placeholder="Confirm the password"><br>
                         <input type="submit" value="Sign up">
                     </fieldset>
                 </form>

@@ -1,5 +1,5 @@
 (function() {
     'use strict';
 
-    angular.module('app.layout', ['app.core', 'app.apis', 'isteven-multi-select']);
+    angular.module('app.layout', ['app.core', 'isteven-multi-select']);
 })();

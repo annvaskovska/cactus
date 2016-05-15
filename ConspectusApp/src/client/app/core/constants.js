@@ -2,12 +2,12 @@
 (function() {
     //'use strict';
 
-    if (typeof Trello == 'undefined') Trello = {authorized: function() {return true;}}; // jshint ignore:line
+    //if (typeof Trello == 'undefined') Trello = {authorized: function() {return true;}}; // jshint ignore:line
 
     angular
         .module('app.core')
         .constant('moment', moment)
-        .constant('Trello', Trello) // KEEP AN EYE! Trello is exposed by client.js from index file
+        //.constant('Trello', Trello) // KEEP AN EYE! Trello is exposed by client.js from index file
         .constant('apiUrl', apiUrl())
         .constant('d3', typeof(d3) === 'undefined' ? 'd3mocked' : d3); // jshint ignore:line
 
