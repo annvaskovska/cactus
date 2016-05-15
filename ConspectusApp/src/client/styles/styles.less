@@ -595,13 +595,19 @@ iframe {
     width: 100%;
     color: white;
     height: auto;
-    background-image: url("../images/bg.jpg");
+    background-image: url("../images/bg1.png");
     background-repeat: no-repeat;
     background-position: center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+
+    h1 {
+        font-size: 50px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
 }
 
 @media (min-width: 1280px) {
@@ -684,7 +690,6 @@ a[role="button"]:hover {
 }
 
 #forms {
-    height: 285px;
     padding:0;
     margin:0;
 }
@@ -699,6 +704,7 @@ h3 {
 }
 
 .with-sign-in {
+    height: 343.5px;
     padding: 50px;
     background-color: rgb(92, 109, 115);
 }
@@ -740,6 +746,7 @@ h3 {
 }
 
 .with-sign-up {
+    height: 343.5px;
     padding: 25px;
 }
 
@@ -782,4 +789,52 @@ h3 {
 
 .with-sign-up input[type="text"]:focus {
     border-bottom: 1px solid white;
+}
+
+//--------------------------header--------------
+#head {
+    height: 80px;
+    padding: 10px 5px;
+
+    #left_part, #right_part {
+        display: inline-block;
+        padding: 0 15px;
+    }
+
+    #left_part {
+        width: 30%;
+        border-right: 1px solid black;
+    }
+
+    #right_part {
+        width: 69.7%;
+    }
+
+    span:first-child {
+        padding-right: 5px;
+        border-right: 1px solid black;
+    }
+
+    span:last-child {
+        padding-left: 5px;
+    }
+
+    #subject, #schedule, #professor {
+        height: 20px;
+    }
+
+    #title, #hashtags {
+        height: 30px;
+    }
+
+    #left_part div, #right_part div {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap; /* Запрещаем перенос строк */
+        text-overflow: ellipsis;
+    }
+
+    #title {
+        font-weight: 800;
+    }
 }

@@ -9,6 +9,9 @@
     /* @ngInject */
     function LandingController(logger, $state, $scope, user) {
         var vmLanding = this;
+        vmLanding.nickname = "";
+        vmLanding.password = "";
+        vmLanding.passwordConfirm = "";
         vmLanding.logIn = logIn;
         vmLanding.user = user;
 

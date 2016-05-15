@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a href="#page-top" class="pull-left"><img src="../../images/bg.jpg" style="max-height: 50px"></a>
+            <a href="#page-top" class="pull-left"><img src="../../images/wand.png" style="max-height: 50px"></a>
         </div>
         <!-- //.navbar-header -->
 
@@ -65,8 +65,8 @@
                 <h3>Sign in with existing account</h3>
                 <form class="center-block">
                     <fieldset>
-                        <input type="text" name="login" value="Nickname"><br>
-                        <input type="text" name="password" value="Password"><br>
+                        <input type="text" name="login" placeholder="Nickname" mg-model="vmLanding.nickname"><br>
+                        <input type="text" name="password" placeholder="Password" ng-model="vmLanding.password"><br>
                         <input type="submit" value="Sign in">
                     </fieldset>
                 </form>
@@ -75,9 +75,9 @@
                 <h3>Not registered yet?</h3>
                 <form class="center-block">
                     <fieldset>
-                        <input type="text" name="login" value="Nickname"><br>
-                        <input type="text" name="password" value="Password"><br>
-                        <input type="text" name="confirm_password" value="Confirm the password"><br>
+                        <input type="text" name="login" placeholder="Nickname" mg-model="vmLanding.nickname"><br>
+                        <input type="text" name="password" placeholder="Password" ng-model="vmLanding.password"><br>
+                        <input type="text" name="confirm_password" placeholder="Confirm the password" ng-model="vmLanding.passwordConfirm"><br>
                         <input type="submit" value="Sign up">
                     </fieldset>
                 </form>
@@ -85,5 +85,3 @@
         </div>
     </div>
 </section>
-<script src="js/jquery-2.2.1.min.js"></script>
-<script src="js/bootstrap.js"></script>

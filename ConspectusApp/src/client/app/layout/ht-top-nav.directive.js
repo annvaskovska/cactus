@@ -28,6 +28,14 @@
             vm.isCurrent = isCurrent;
             vm.user = user;
             vm.logOut = logOut;
+            vm.lecture = {
+                title: "Lection"
+            };
+
+            $rootScope.$on('UpdateSheet', function(event, args) {
+                console.log(args.lecture);
+                vm.lecture = args.lecture;
+            });
 
             function isCurrent(route) {
                 if (!$state.current || !$state.current.title) {

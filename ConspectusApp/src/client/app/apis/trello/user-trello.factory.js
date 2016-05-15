@@ -1,18 +1,3 @@
-/**
- * @ngdoc service
- * @name authService
- * @memberOf app.trello
- * @description
- * Provides authentication method for Trello object
- * @example
- * ```
- * ...$inject = [..., 'authservice'];
- *
- * function someService(authservice) {
- *     var Trello = authservice.authorize();
- * }
- * ```
- */
 
 (function () {
     'use strict';
@@ -31,7 +16,7 @@
 
         return {
             authorize: authorize,
-            authorized: undefined,
+            authorized: false,
             deauthorize: deauthorize,
             getMe: getMe
         };
