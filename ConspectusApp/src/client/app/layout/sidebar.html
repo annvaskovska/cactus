@@ -17,7 +17,9 @@
                     href="#"
                     id="{{subject.id}}"
                     ng-class="{'active-subject': vmSidebar.isActive(subject)}"
-                    ng-click="subject.isCollapsed = !subject.isCollapsed; vmSidebar.updateActiveSubject(subject)">
+                    ng-click="subject.isCollapsed = !subject.isCollapsed;
+                                vmSidebar.updateActiveSubject(subject);
+                                vmSidebar.activeSubjectId = subject.id">
                     {{subject.title}}
                 </a>
                 <ul uib-collapse="subject.isCollapsed">
@@ -25,7 +27,7 @@
                         <a
                             href='#' ,
                             ng-class="{'active-lecture': vmSidebar.isActive(lecture)}"
-                            ng-click="vmSidebar.updateSheet(lecture)"
+                            ng-click="vmSidebar.updateSheet(lecture, subject); vmSidebar.activeLectureId = lecture.id"
                             id='{{lecture.id}}'>
                             {{lecture.title}}
                         </a>

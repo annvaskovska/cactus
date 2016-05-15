@@ -13,6 +13,8 @@
         vm.onlineStatus = true;
         vm.saveChanges = saveChanges;
         vm.deleteLecture = deleteLecture;
+        vm.parentSubjectId =  null;
+        vm.parentLectureId =  null;
 
         if( localStorage.getItem('user')) {
             vm.user = localStorage.getItem('user');
@@ -28,6 +30,8 @@
         vm.lecture = {};
         $scope.$on('UpdateSheet', function(event, args) {
             vm.lecture = args.lecture;
+            vm.parentLectureId = args.lecture.id;
+            vm.parentSubjectId = args.subject.id;
             vm.html = args.lecture.html;
         });
 
@@ -35,7 +39,7 @@
             var sendData = {
                 html: vm.html
             }
-            $http.post(apiUrl.host + vm.user.tocken + '/52/' + vm.lecture.id, sendData)
+            $http.post(apiUrl.host + vm.user.tocken + '/' +vm.parentSubjectId + '/' + vm.lecture.id, sendData)
                 .then(function () {
                     $http.get(apiUrl.host + vm.user.tocken +'/all')
                         .then(function (res) {
@@ -46,7 +50,7 @@
         }
 
         function deleteLecture() {
-            $http.delete(apiUrl.host + vm.user.tocken + '/52/' + vm.lecture.id)
+            $http.delete(apiUrl.host + vm.user.tocken + '/' + vm.parentSubjectId +  '/' + vm.lecture.id)
                 .then(function () {
                     $http.get(apiUrl.host + vm.user.tocken +'/all')
                         .then(function (res) {

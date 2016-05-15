@@ -33,22 +33,25 @@
             vm.synchronized = false;
             vm.isActive = isActive;
 
+            vm.activeSubjectId = vm.user.subjects[0].id;
+            vm.activeLectureId = vm.user.subjects[0].lectures ? user.subjects[0].lectures[0] : null;
+
             vm.setCurrentProject = setCurrentProject;
             vm.currentProjectID = user.currentProjectID;
             vm.updateSheet = updateSheet;
             vm.updateActiveSubject = updateActiveSubject;
 
-            function updateSheet(lecture) {
-                $rootScope.$broadcast('UpdateSheet', {lecture: lecture});
+            function updateSheet(lecture, subject) {
+                $rootScope.$broadcast('UpdateSheet', {lecture: lecture, subject: subject});
                 updateActiveLeactures(lecture);
             }
 
             function updateActiveLeactures(inputLecture) {
                 clearActiveLecture();
 
-                for (var i= 0; i < vm.user.subjects.length; i++) {
-                    for (var j= 0; i < i.length; i++) {
-                        if(vm.user.subjects[i][j].id === inputLecture.id) {
+                for (var i = 0; i < vm.user.subjects.length; i++) {
+                    for (var j = 0; i < i.length; i++) {
+                        if (vm.user.subjects[i][j].id === inputLecture.id) {
                             vm.user.subjects[i][j].isActive = true;
                         }
                     }
@@ -57,8 +60,8 @@
 
             function clearActiveLecture() {
 
-                for (var i= 0; i < vm.user.subjects.length; i++) {
-                    for (var j= 0; i < i.length; i++) {
+                for (var i = 0; i < vm.user.subjects.length; i++) {
+                    for (var j = 0; i < i.length; i++) {
                         vm.user.subjects[i][j].isActive = false;
                     }
                 }
@@ -123,9 +126,9 @@
                                         title: projectName
                                     };
                                     $http.put(apiUrl.host + vm.user.tocken, sendData).then(
-                                        function() {
+                                        function () {
                                             $http.get(apiUrl.host + vm.user.tocken)
-                                                .then(function(res) {
+                                                .then(function (res) {
                                                     user.subjects = res.data.subjects;
                                                     $uibModalInstance.dismiss();
                                                 })
@@ -179,13 +182,11 @@
                                         title: lectureName,
                                         html: ''
                                     };
-                                    $http.put(apiUrl.host + vm.user.tocken +'/52', sendData).then(
-                                        function() {
-                                            $http.get(apiUrl.host + vm.user.tocken +'/52')
-                                                .then(function(res) {
-                                                    console.log(res);
-                                                    user.subjects[1].lectures = res.data.lectures;
-                                                    console.log(user);
+                                    $http.put(apiUrl.host + vm.user.tocken + '/' + vm.activeSubjectId, sendData).then(
+                                        function () {
+                                            $http.get(apiUrl.host + vm.user.tocken + '/all')
+                                                .then(function (res) {
+                                                    user.subjects = res.data.subjects;
                                                     $uibModalInstance.dismiss();
                                                 })
                                         }
