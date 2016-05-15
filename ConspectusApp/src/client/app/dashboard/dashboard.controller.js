@@ -5,31 +5,56 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$q', 'logger', '$http', 'apiUrl', '$scope'];
+    DashboardController.$inject = ['$q', 'logger', '$http', 'apiUrl', '$scope', 'user'];
     /* @ngInject */
 
-    function DashboardController($q, logger, $http, apiUrl, $scope) {
+    function DashboardController($q, logger, $http, apiUrl, $scope, user) {
         var vm = this;
         vm.onlineStatus = true;
+        vm.saveChanges = saveChanges;
+        vm.deleteLecture = deleteLecture;
+
+        if( localStorage.getItem('user')) {
+            vm.user = localStorage.getItem('user');
+        }
+        vm.user = user;
 
         vm.gridsterOpts = {
             margins: [20, 20],
             rowHeight: 270,
             columns: 3,
-            mobileBreakPoint: 750,
-            resizable: {
-                resize: function(e, elem, widget) {
-                    $scope.$broadcast(widget.boardResized);
-                }
-            }
+            mobileBreakPoint: 750
         };
-
-        vm.html = '<h1>test text</h1>';
-
+        vm.lecture = {};
         $scope.$on('UpdateSheet', function(event, args) {
+            vm.lecture = args.lecture;
             vm.html = args.lecture.html;
         });
 
+        function saveChanges() {
+            var sendData = {
+                html: vm.html
+            }
+            $http.post(apiUrl.host + vm.user.tocken + '/52/' + vm.lecture.id, sendData)
+                .then(function () {
+                    $http.get(apiUrl.host + vm.user.tocken +'/all')
+                        .then(function (res) {
+                            console.log(res);
+                            user.subjects = res.data.subjects;
+                        })
+                })
+        }
+
+        function deleteLecture() {
+            $http.delete(apiUrl.host + vm.user.tocken + '/52/' + vm.lecture.id)
+                .then(function () {
+                    $http.get(apiUrl.host + vm.user.tocken +'/all')
+                        .then(function (res) {
+                            console.log(res);
+                            user.subjects = res.data.subjects;
+                        })
+                })
+        }
 
         //activate();
         //

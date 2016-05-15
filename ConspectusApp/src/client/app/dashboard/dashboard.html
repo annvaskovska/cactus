@@ -12,23 +12,23 @@
                         </span>
                         </p>
                     </div>
-                    <div class="col-sm-3 info-tab-item">
-                        <p class="text-center">
-                            <span>LAST EDITED 24 JAN 2016, 16:00</span>
-                        </p>
-                    </div>
+                    <!--<div class="col-sm-3 info-tab-item">-->
+                        <!--<p class="text-center">-->
+                            <!--<span>LAST EDITED 24 JAN 2016, 16:00</span>-->
+                        <!--</p>-->
+                    <!--</div>-->
                     <div class="col-sm-2 info-tab-item">
                         <p class="text-center export-btn">
                             <a><i class="fa fa-file"></i>EXPORT TO PDF</a>
                         </p>
                     </div>
                     <div class="col-sm-2 info-tab-item">
-                        <p class="text-center save-btn">
+                        <p class="text-center save-btn" ng-click="vmDashboard.saveChanges()">
                             <i class="fa fa-floppy-o"></i><span>SAVE</span>
                         </p>
                     </div>
                     <div class="col-sm-2 info-tab-item">
-                        <p class="text-center delete-btn">
+                        <p class="text-center delete-btn" ng-click="vmDashboard.deleteLecture()">
                             <i class="fa fa-trash-o"></i><span>DELETE</span>
                         </p>
                     </div>

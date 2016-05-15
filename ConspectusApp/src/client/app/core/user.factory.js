@@ -7,12 +7,19 @@
     userFactory.$inject = ['$rootScope', '$http', '$q'];
 
     function userFactory($rootScope, $http, $q) {
-        var service = {
-            authorized: false,
-            authorize: authorize,
-            deauthorize: deauthorize
-        };
-
+        var service = {};
+        if(localStorage.getItem('token')) {
+            $http.get('http://localhost:8080/api/82fe7916-eecc-4e79-9731-0a87d75eb3e0/all')
+                .then(function (res) {
+                    service.subjects = res.data.subjects;
+                })
+        } else {
+            service = {
+                authorized: localStorage.getItem('authorized'),
+                authorize: authorize,
+                deauthorize: deauthorize
+            };
+        }
         getMe();
 
         function getMe() {

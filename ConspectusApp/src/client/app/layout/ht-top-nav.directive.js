@@ -29,7 +29,7 @@
             vm.user = user;
             vm.logOut = logOut;
             vm.lecture = {
-                title: "Lection"
+                title: "Choose lection from list :)"
             };
 
             $rootScope.$on('UpdateSheet', function(event, args) {

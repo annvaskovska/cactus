@@ -1,0 +1,41 @@
+<div class="container-fluid add-project-container">
+    <div class="row-fluid">
+        <div class="modal-header">
+            <h4 class="modal-title"> Create new lecture file </h4>
+        </div>
+        <div class="modal-body">
+            <form action="" name="addProjectForm" novalidate>
+                <div class="form-group">
+                    <label for="lectureName">Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="lectureName"
+                        name="lectureName"
+                        ng-init="vmModal.lectureName=''"
+                        ng-model="vmModal.lectureName"
+                        ng-maxlength="40"
+                        ng-minlength="2"
+                        required/>
+
+                </div>
+
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button
+                class="btn btn-default"
+                ng-click="vmModal.dismiss()">
+                Cancel
+            </button>
+            <button
+                class="btn btn-success"
+                id="btnCreateProject"
+                ng-click="vmModal.createProjAndOrgLecture()"
+                ng-disabled="!addProjectForm.$valid">
+                Create
+            </button>
+        </div>
+        <br/>
+    </div>
+</div>

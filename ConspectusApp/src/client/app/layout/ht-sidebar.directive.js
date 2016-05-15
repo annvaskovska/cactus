@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -6,7 +6,7 @@
         .directive('htSidebar', htSidebar);
 
     /* @ngInject */
-    function htSidebar () {
+    function htSidebar() {
         var directive = {
             bindToController: true,
             controller: SidebarController,
@@ -20,75 +20,23 @@
         };
 
         SidebarController.$inject = ['$uibModal', 'logger', 'sidebarFactory',
-            'user', '$state', '$rootScope'];
+            'user', '$state', '$rootScope', '$scope', '$http', 'apiUrl'];
 
         /* @ngInject */
 
-        function SidebarController($uibModal, logger, sidebarFactory, user, $state, $rootScope) {
+        function SidebarController($uibModal, logger, sidebarFactory, user, $state, $rootScope, $scope, $http, apiUrl) {
 
             var vm = this;
+            vm.user = user;
             vm.open = openModalCreateProject;
+            vm.openLecture = openModalCreateLecture;
             vm.synchronized = false;
             vm.isActive = isActive;
 
             vm.setCurrentProject = setCurrentProject;
             vm.currentProjectID = user.currentProjectID;
-            vm.updateSheet =  updateSheet;
+            vm.updateSheet = updateSheet;
             vm.updateActiveSubject = updateActiveSubject;
-            vm.subjects = [
-                {
-                    title: 'Subject 1',
-                    id: 1,
-                    isActive: true,
-                    isCollapsed: false,
-                    lectures: [
-                        {
-                            id: 11,
-                            title: 'Lecture 11',
-                            html: '<h2>hello lect 11</h2>',
-                            isActive: true
-                        },
-                        {
-                            id: 12,
-                            title: 'Lecture 12',
-                            html: '<h2>hello lect 12</h2>'
-                        }
-                    ]
-                },{
-                    title: 'Subject 2',
-                    id: 2,
-                    isCollapsed: true,
-                    lectures: [
-                        {
-                            id: 21,
-                            title: 'Lecture 21',
-                            html: 'hello lect 11'
-                        },
-                        {
-                            id: 22,
-                            title: 'Lecture 22',
-                            html: 'hello lect 12'
-                        }
-                    ]
-                },
-                {
-                    title: 'Subject 3',
-                    id: 3,
-                    isCollapsed: true,
-                    lectures: [
-                        {
-                            id: 31,
-                            title: 'Lecture 31',
-                            html: 'hello lect 11'
-                        },
-                        {
-                            id: 32,
-                            title: 'Lecture 32',
-                            html: 'hello lect 12'
-                        }
-                    ]
-                }
-            ];
 
             function updateSheet(lecture) {
                 $rootScope.$broadcast('UpdateSheet', {lecture: lecture});
@@ -97,27 +45,29 @@
 
             function updateActiveLeactures(inputLecture) {
                 clearActiveLecture();
-                vm.subjects.forEach(function(subject) {
-                    subject.lectures.forEach(function(lecture) {
-                        if(lecture.id === inputLecture.id) {
-                            lecture.isActive = true;
+
+                for (var i= 0; i < vm.user.subjects.length; i++) {
+                    for (var j= 0; i < i.length; i++) {
+                        if(vm.user.subjects[i][j].id === inputLecture.id) {
+                            vm.user.subjects[i][j].isActive = true;
                         }
-                    })
-                });
+                    }
+                }
             }
 
             function clearActiveLecture() {
-                vm.subjects.forEach(function(subject) {
-                    subject.lectures.forEach(function(lecture) {
-                        lecture.isActive = false;
-                    })
-                });
+
+                for (var i= 0; i < vm.user.subjects.length; i++) {
+                    for (var j= 0; i < i.length; i++) {
+                        vm.user.subjects[i][j].isActive = false;
+                    }
+                }
             }
 
             function updateActiveSubject(inputSublect) {
                 clearActiveSublect();
-                vm.subjects.forEach(function(subject) {
-                    if(inputSublect.id === subject.id) {
+                vm.user.subjects.forEach(function (subject) {
+                    if (inputSublect.id === subject.id) {
                         subject.isCollapsed = false;
                         subject.isActive = true;
                     }
@@ -125,16 +75,16 @@
             }
 
             function clearActiveSublect() {
-                vm.subjects.forEach(function(subject) {
-                   subject.isCollapsed = true;
-                   subject.isActive = false;
+                vm.user.subjects.forEach(function (subject) {
+                    subject.isCollapsed = true;
+                    subject.isActive = false;
                 });
             }
 
             //var Trello = authservice.authorize();
 
             //createProjectFactory.syncProjAndOrg(Trello).then(function (res) {
-            sidebarFactory.findProjects().then(function(data) {
+            sidebarFactory.findProjects().then(function (data) {
                 vm.projects = data;
                 if (data.length === 0) {
                     logger.error('Create the first project to start');
@@ -143,11 +93,11 @@
             });
             //});
 
-            function isActive (lecture) {
+            function isActive(lecture) {
                 return lecture.isActive;
             }
 
-            function openModalCreateProject () {
+            function openModalCreateProject() {
                 var modalCreateProject = $uibModal.open({
                         templateUrl: 'app/layout/add-project.html',
                         controller: function ($uibModalInstance) {
@@ -156,44 +106,90 @@
                             vmModal.createProjAndOrg = createProjAndOrg;
                             vmModal.dismiss = modalCreateProject.dismiss;
 
-                            // data for trello boards creation
-                            vmModal.backlogLists = ManageTrelloProject.getBacklogLists();
-                            vmModal.workingLists = ManageTrelloProject.getWorkingLists();
                             vmModal.outputBacklogList = vmModal.backlogLists;
                             vmModal.outputWorkingList = vmModal.workingLists;
 
                             // Function creates Project and Trello Organization
                             function createProjAndOrg() {
-                                var projectName = vmModal.projectName,
-                                    projectDescription = vmModal.projectDescription;
+                                var projectName = vmModal.projectName;
+
 
                                 if (projectName !== '')
-                                    createOrganization(projectName, projectDescription);
+                                    createOrganization(projectName);
                                 else logger.error('Please fill the project name.');
 
-                                function createOrganization(projectName, projectDescription) {
+                                function createOrganization(projectName) {
+                                    var sendData = {
+                                        title: projectName
+                                    };
+                                    $http.put(apiUrl.host + vm.user.tocken, sendData).then(
+                                        function() {
+                                            $http.get(apiUrl.host + vm.user.tocken)
+                                                .then(function(res) {
+                                                    user.subjects = res.data.subjects;
+                                                    $uibModalInstance.dismiss();
+                                                })
+                                        }
+                                    )
+                                }
+                            }
 
-                                    if (Trello.authorized()) {
+                            function changeModal() {
+                                modalCreateProject.dismiss();
 
-                                        createProjectFactory.createProjAndOrg(Trello,
-                                            projectName, projectDescription)
-                                            .then(function (res) {
+                                var modalProjectCreated = $uibModal.open({
+                                    templateUrl: 'app/layout/project-added.html',
+                                    controller: function () {
 
-                                                console.log(res);
-                                                setCustomContent(res, vmModal.outputBacklogList,
-                                                    vmModal.outputWorkingList);
+                                        var vmSidebarModal = this;
 
-                                                sidebarFactory.findProjects().then(function(data) {
-                                                    vm.projects = data;
-                                                    changeModal();
-                                                });
-                                            },
+                                        vmSidebarModal.exit = function () {
+                                            modalProjectCreated.dismiss();
+                                        };
+                                    },
+                                    controllerAs: 'vmSidebarModal'
+                                });
+                            }
+                        },
+                        controllerAs: 'vmModal'
+                    }
+                );
+            }
 
-                                            function (err) {
-                                                logger.error('New project has not been created.');
-                                            }
-                                        );
-                                    }
+            function openModalCreateLecture() {
+                var modalCreateProject = $uibModal.open({
+                        templateUrl: 'app/layout/add-lecture.html',
+                        controller: function ($uibModalInstance) {
+
+                            var vmModal = this;
+                            vmModal.createProjAndOrgLecture = createProjAndOrgLecture;
+                            vmModal.dismiss = modalCreateProject.dismiss;
+
+                            // Function creates Project and Trello Organization
+                            function createProjAndOrgLecture() {
+                                var lectureName = vmModal.lectureName;
+
+
+                                if (lectureName !== '')
+                                    createOrganization(lectureName);
+                                else logger.error('Please fill the project name.');
+
+                                function createOrganization(lectureName) {
+                                    var sendData = {
+                                        title: lectureName,
+                                        html: ''
+                                    };
+                                    $http.put(apiUrl.host + vm.user.tocken +'/52', sendData).then(
+                                        function() {
+                                            $http.get(apiUrl.host + vm.user.tocken +'/52')
+                                                .then(function(res) {
+                                                    console.log(res);
+                                                    user.subjects[1].lectures = res.data.lectures;
+                                                    console.log(user);
+                                                    $uibModalInstance.dismiss();
+                                                })
+                                        }
+                                    )
                                 }
                             }
 
@@ -230,32 +226,32 @@
             function setCustomContent(idOrganization, outputBacklogList, outputWorkingList) {
                 var backlog, working, bLists, wLists;
 
-                backlog = new ManageTrelloProject.Board('Backlog');
-                working = new ManageTrelloProject.Board('Working');
+                //backlog = new ManageTrelloProject.Board('Backlog');
+                //working = new ManageTrelloProject.Board('Working');
 
                 bLists = [];
                 wLists = [];
                 var newList;
 
-                for (var i = 0; i < outputBacklogList.length; i++) {
-                    newList = new ManageTrelloProject.List(outputBacklogList[i].name);
-                    newList.closed = !outputBacklogList[i].ticked;
-                    bLists.push(newList);
-                }
-                for (i = 0; i < outputWorkingList.length; i++) {
-                    newList = new ManageTrelloProject.List(outputWorkingList[i].name);
-                    newList.closed = !outputWorkingList[i].ticked;
-                    wLists.push(newList);
-                }
-                for (i = 0; i < bLists.length; i++) {
-                    backlog.lists.push(bLists[i]);
-                }
-                for (i = 0; i < wLists.length; i++) {
-                    working.lists.push(wLists[i]);
-                }
+                //for (var i = 0; i < outputBacklogList.length; i++) {
+                //    newList = new ManageTrelloProject.List(outputBacklogList[i].name);
+                //    newList.closed = !outputBacklogList[i].ticked;
+                //    bLists.push(newList);
+                //}
+                //for (i = 0; i < outputWorkingList.length; i++) {
+                //    newList = new ManageTrelloProject.List(outputWorkingList[i].name);
+                //    newList.closed = !outputWorkingList[i].ticked;
+                //    wLists.push(newList);
+                //}
+                //for (i = 0; i < bLists.length; i++) {
+                //    backlog.lists.push(bLists[i]);
+                //}
+                //for (i = 0; i < wLists.length; i++) {
+                //    working.lists.push(wLists[i]);
+                //}
 
-                ManageTrelloProject.addBoard(backlog, idOrganization);
-                ManageTrelloProject.addBoard(working, idOrganization);
+                //ManageTrelloProject.addBoard(backlog, idOrganization);
+                //ManageTrelloProject.addBoard(working, idOrganization);
             }
         }
 

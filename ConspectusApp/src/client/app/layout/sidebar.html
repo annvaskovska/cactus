@@ -12,7 +12,7 @@
             <!-- /input-group -->
         </div>
         <ul>
-            <li class="subject" ng-repeat="subject in vmSidebar.subjects track by subject.id ">
+            <li class="subject" ng-repeat="subject in vmSidebar.user.subjects track by subject.id ">
                 <a
                     href="#"
                     id="{{subject.id}}"
@@ -38,7 +38,7 @@
             <i class="fa fa-plus"></i>
             Add subject folder
         </a>
-        <a class="btn btn-block add-subject" ng-click="" id="btnAddProject">
+        <a class="btn btn-block add-subject" ng-click="vmSidebar.openLecture()">
             <i class="fa fa-plus"></i>
             Add lecture to current folder
         </a>
