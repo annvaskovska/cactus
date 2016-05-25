@@ -20,7 +20,9 @@
                     ng-click="subject.isCollapsed = !subject.isCollapsed;
                                 vmSidebar.updateActiveSubject(subject);
                                 vmSidebar.activeSubjectId = subject.id">
+                    <span class="glyphicon glyphicon-plus" ng-click="vmSidebar.addLecture(subject)"></span>
                     {{subject.title}}
+                    <span class="glyphicon glyphicon-trash  pull-right" ng-click="vmSidebar.deleteSubject(subject)"></span>
                 </a>
                 <ul uib-collapse="subject.isCollapsed">
                     <li class="lecture" ng-repeat="lecture in subject.lectures track by lecture.id ">
@@ -39,10 +41,6 @@
         <a class="btn btn-block add-subject" ng-click="vmSidebar.open()" id="btnAddProject">
             <i class="fa fa-plus"></i>
             Add subject folder
-        </a>
-        <a class="btn btn-block add-subject" ng-click="vmSidebar.openLecture()">
-            <i class="fa fa-plus"></i>
-            Add lecture to current folder
         </a>
         <!--</div>-->
     </div>

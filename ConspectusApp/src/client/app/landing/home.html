@@ -39,9 +39,7 @@
                         <h1>Conspectus Patronum</h1>
                     </div>
                     <div class="intro-text text-center">
-                        <h2>Get your notes systemised.</h2>
-
-                        <p class="lead">And, for God's sake, forget about hand-written notes. We are in 21st century.</p>
+                        <h2>Get your notes classified.</h2>
                     </div>
                 </div>
             </div>
@@ -73,10 +71,10 @@
             </div>
             <div class="col-md-6 with-sign-up text-center">
                 <h3>Not registered yet?</h3>
-                <form class="center-block">
+                <form class="center-block" ng-submit="vmLanding.register()">
                     <fieldset>
-                        <input type="text" name="login_reg" placeholder="Nickname"><br>
-                        <input type="password" name="password_reg" placeholder="Password"><br>
+                        <input type="text" name="login" placeholder="Nickname" ng-model="vmLanding.user.name"><br>
+                        <input type="password" name="pass" placeholder="Password"><br>
                         <input type="password" name="confirm_password_reg" placeholder="Confirm the password"><br>
                         <input type="submit" value="Sign up">
                     </fieldset>

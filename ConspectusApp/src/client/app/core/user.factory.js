@@ -12,6 +12,7 @@
             $http.get('http://localhost:8080/api/82fe7916-eecc-4e79-9731-0a87d75eb3e0/all')
                 .then(function (res) {
                     service.subjects = res.data.subjects;
+                    localStorage.setItem('user', JSON.stringify(service) );
                 })
         } else {
             service = {
@@ -39,13 +40,6 @@
         function deauthorize() {
             //
         }
-
-        //function changeCurrentProject(id) {
-        //    $http.put('/api/v1/Users/' + service.id, {currentProjectID: id}).success(function() {
-        //        service.currentProjectID = id;
-        //        getMe();
-        //    });
-        //}
 
         return service;
 

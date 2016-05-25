@@ -10,7 +10,7 @@
 
     function DashboardController($q, logger, $http, apiUrl, $scope, user) {
         var vm = this;
-        vm.onlineStatus = true;
+        vm.onlineStatus = 1;
         vm.saveChanges = saveChanges;
         vm.deleteLecture = deleteLecture;
         vm.parentSubjectId =  null;
@@ -20,6 +20,8 @@
             vm.user = localStorage.getItem('user');
         }
         vm.user = user;
+
+        vm.editingMode = false;
 
         vm.gridsterOpts = {
             margins: [20, 20],
@@ -33,20 +35,38 @@
             vm.parentLectureId = args.lecture.id;
             vm.parentSubjectId = args.subject.id;
             vm.html = args.lecture.html;
+            vm.editingMode = true;
         });
 
         function saveChanges() {
             var sendData = {
                 html: vm.html
+            };
+
+            if (vm.onlineStatus === 0) {
+                var oldUser = JSON.parse(localStorage.getItem('user'));
+                for (var i=0; i < oldUser.subjects.length; i++) {
+                    console.log(oldUser.subjects[i].id == vm.parentSubjectId);
+                    if (oldUser.subjects[i].id == vm.parentSubjectId) {
+                        for (var j=0; j < oldUser.subjects[i].lectures.length; j++) {
+                            console.log("j=" + j);
+                            if (oldUser.subjects[i].lectures[j].id === vm.lecture.id) {
+                                oldUser.subjects[i].lectures[j].html = vm.html;
+                            }
+                        }
+                    }
+                }
+                localStorage.setItem('user', JSON.stringify(oldUser));
+            } else {
+                $http.post(apiUrl.host + vm.user.tocken + '/' + vm.parentSubjectId + '/' + vm.lecture.id, sendData)
+                    .then(function () {
+                        $http.get(apiUrl.host + vm.user.tocken + '/all')
+                            .then(function (res) {
+                                user.subjects = res.data.subjects;
+                                localStorage.setItem('user', JSON.stringify(user));
+                            })
+                    })
             }
-            $http.post(apiUrl.host + vm.user.tocken + '/' +vm.parentSubjectId + '/' + vm.lecture.id, sendData)
-                .then(function () {
-                    $http.get(apiUrl.host + vm.user.tocken +'/all')
-                        .then(function (res) {
-                            console.log(res);
-                            user.subjects = res.data.subjects;
-                        })
-                })
         }
 
         function deleteLecture() {
@@ -54,8 +74,8 @@
                 .then(function () {
                     $http.get(apiUrl.host + vm.user.tocken +'/all')
                         .then(function (res) {
-                            console.log(res);
                             user.subjects = res.data.subjects;
+                            localStorage.setItem('user', JSON.stringify(user) );
                         })
                 })
         }

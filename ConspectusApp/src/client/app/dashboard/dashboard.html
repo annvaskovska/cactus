@@ -1,22 +1,24 @@
 <section class="mainbar">
     <div class="matter">
-        <div class="container-fluid">
+        <div class="container-fluid text-center empty-text-area" ng-if="!vmDashboard.editingMode">
+            <span class="glyphicon glyphicon-text-background"></span>
+            <p>Обери лекцію для редарування у меню зліва</p>
+        </div>
+        <div class="container-fluid" ng-if="vmDashboard.editingMode">
 
             <!--Header-->
             <div class="row info-tab">
                 <div class="col-xs-12">
+                    <!--<div class="col-xs-1" style='padding:7px 0px'>-->
+                        <!--<button type="button" class="btn  btn-sm  pull-right"  ng-model="vmDashboard.onlineStatus" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">-->
+                            <!--{{vmDashboard.onlineStatus ? 'off' : 'on' }}-->
+                        <!--</button>-->
+                    <!--</div>-->
                     <div class="col-sm-3 info-tab-item">
-                        <p class="text-center onlineStatus">CURRENTLY WORKING
-                        <span ng-class="vmDashboard.onlineStatus ? 'online' : 'offline'">
-                            {{vmDashboard.onlineStatus ? 'ONLINE' : 'OFFLINE'}}
-                        </span>
+                        <p class="text-center">CURRENTLY WORKING
+                        <span class="online"> ONLINE </span>
                         </p>
                     </div>
-                    <!--<div class="col-sm-3 info-tab-item">-->
-                        <!--<p class="text-center">-->
-                            <!--<span>LAST EDITED 24 JAN 2016, 16:00</span>-->
-                        <!--</p>-->
-                    <!--</div>-->
                     <div class="col-sm-2 info-tab-item">
                         <p class="text-center export-btn">
                             <a><i class="fa fa-file"></i>EXPORT TO PDF</a>

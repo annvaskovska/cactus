@@ -18,12 +18,13 @@
         };
 
         vm.user = user;
-
         vm.sidebar = {
             sidebarToggle: function() {
                 this.visible = !this.visible;
             }
         };
+
+        vm.sidebar.visible = true;
 
         activate();
 

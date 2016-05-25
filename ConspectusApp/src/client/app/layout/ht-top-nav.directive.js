@@ -29,12 +29,16 @@
             vm.user = user;
             vm.logOut = logOut;
             vm.lecture = {
-                title: "Choose lection from list :)"
+                title: ""
             };
+            vm.sublect = {
+                title: ""
+            }
 
             $rootScope.$on('UpdateSheet', function(event, args) {
                 console.log(args.lecture);
                 vm.lecture = args.lecture;
+                vm.subject = args.subject;
             });
 
             function isCurrent(route) {

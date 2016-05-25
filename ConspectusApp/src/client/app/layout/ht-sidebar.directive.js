@@ -29,13 +29,14 @@
             var vm = this;
             vm.user = user;
             vm.open = openModalCreateProject;
-            vm.openLecture = openModalCreateLecture;
+            vm.addLecture = openModalCreateLecture;
             vm.synchronized = false;
             vm.isActive = isActive;
 
-            vm.activeSubjectId = vm.user.subjects[0].id;
-            vm.activeLectureId = vm.user.subjects[0].lectures ? user.subjects[0].lectures[0] : null;
+            vm.activeSubjectId = vm.user.subjects.length > 0 ? vm.user.subjects[0].id : null;
+            vm.activeLectureId = vm.activeSubjectId && vm.user.subjects[0].lectures ? user.subjects[0].lectures[0] : null;
 
+            vm.deleteSubject = deleteSubject;
             vm.setCurrentProject = setCurrentProject;
             vm.currentProjectID = user.currentProjectID;
             vm.updateSheet = updateSheet;
@@ -100,6 +101,19 @@
                 return lecture.isActive;
             }
 
+            function deleteSubject(subject) {
+                $http.delete(apiUrl.host + vm.user.tocken + '/' + subject.id).then(
+                    function () {
+                        logger.success('Видалено успішно');
+                        $http.get(apiUrl.host + vm.user.tocken + '/all')
+                            .then(function (res) {
+                                user.subjects = res.data.subjects;
+                                localStorage.setItem('user', JSON.stringify(user));
+                            })
+                    }
+                )
+            }
+
             function openModalCreateProject() {
                 var modalCreateProject = $uibModal.open({
                         templateUrl: 'app/layout/add-project.html',
@@ -159,19 +173,18 @@
                 );
             }
 
-            function openModalCreateLecture() {
+            function openModalCreateLecture(subject) {
                 var modalCreateProject = $uibModal.open({
                         templateUrl: 'app/layout/add-lecture.html',
                         controller: function ($uibModalInstance) {
 
                             var vmModal = this;
+                            vmModal.SubjectName = subject.title;
                             vmModal.createProjAndOrgLecture = createProjAndOrgLecture;
                             vmModal.dismiss = modalCreateProject.dismiss;
 
-                            // Function creates Project and Trello Organization
                             function createProjAndOrgLecture() {
                                 var lectureName = vmModal.lectureName;
-
 
                                 if (lectureName !== '')
                                     createOrganization(lectureName);
@@ -182,11 +195,12 @@
                                         title: lectureName,
                                         html: ''
                                     };
-                                    $http.put(apiUrl.host + vm.user.tocken + '/' + vm.activeSubjectId, sendData).then(
+                                    $http.put(apiUrl.host + vm.user.tocken + '/' + subject.id, sendData).then(
                                         function () {
                                             $http.get(apiUrl.host + vm.user.tocken + '/all')
                                                 .then(function (res) {
                                                     user.subjects = res.data.subjects;
+                                                    localStorage.setItem('user', JSON.stringify(user));
                                                     $uibModalInstance.dismiss();
                                                 })
                                         }
