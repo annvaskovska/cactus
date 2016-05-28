@@ -230,6 +230,9 @@
                 );
             }
 
+
+
+
             function setCurrentProject($event) {
                 $event.preventDefault();
                 var projectId = $event.target.id;

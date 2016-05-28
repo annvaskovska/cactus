@@ -2,6 +2,7 @@
     <div class="matter">
         <div class="container-fluid text-center empty-text-area" ng-if="!vmDashboard.editingMode">
             <span class="glyphicon glyphicon-text-background"></span>
+
             <p>Обери лекцію для редарування у меню зліва</p>
         </div>
         <div class="container-fluid" ng-if="vmDashboard.editingMode">
@@ -10,28 +11,33 @@
             <div class="row info-tab">
                 <div class="col-xs-12">
                     <!--<div class="col-xs-1" style='padding:7px 0px'>-->
-                        <!--<button type="button" class="btn  btn-sm  pull-right"  ng-model="vmDashboard.onlineStatus" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">-->
-                            <!--{{vmDashboard.onlineStatus ? 'off' : 'on' }}-->
-                        <!--</button>-->
+                    <!--<button type="button" class="btn  btn-sm  pull-right"  ng-model="vmDashboard.onlineStatus" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">-->
+                    <!--{{vmDashboard.onlineStatus ? 'off' : 'on' }}-->
+                    <!--</button>-->
                     <!--</div>-->
                     <div class="col-sm-3 info-tab-item">
-                        <p class="text-center">CURRENTLY WORKING
-                        <span class="online"> ONLINE </span>
+                        <p class="text-center">Наразі працюю
+                            <span class="online"> ОНЛАЙН </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-2 info-tab-item">
+                        <p class="text-center export-btn" ng-click="vmDashboard.addPicture()">
+                            <a><i class="glyphicon glyphicon-picture"></i>ДОДАТИ МАЛЮНОК</a>
                         </p>
                     </div>
                     <div class="col-sm-2 info-tab-item">
                         <p class="text-center export-btn">
-                            <a><i class="fa fa-file"></i>EXPORT TO PDF</a>
+                            <a><i class="fa fa-file"></i>ЕКСПОРТ В PDF</a>
                         </p>
                     </div>
                     <div class="col-sm-2 info-tab-item">
                         <p class="text-center save-btn" ng-click="vmDashboard.saveChanges()">
-                            <i class="fa fa-floppy-o"></i><span>SAVE</span>
+                            <i class="fa fa-floppy-o"></i><span>ЗБЕРЕГТИ ЗМІНИ</span>
                         </p>
                     </div>
                     <div class="col-sm-2 info-tab-item">
                         <p class="text-center delete-btn" ng-click="vmDashboard.deleteLecture()">
-                            <i class="fa fa-trash-o"></i><span>DELETE</span>
+                            <i class="fa fa-trash-o"></i><span>ВИДАЛИТИ</span>
                         </p>
                     </div>
                 </div>

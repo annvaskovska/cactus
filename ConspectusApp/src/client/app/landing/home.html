@@ -15,15 +15,15 @@
         <div class="navbar-collapse collapse" id="navbar-rj-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="page-scroll">
-                    <a href="#who-we-are">About</a>
+                    <a href="#who-we-are">Про автора</a>
                 </li>
 
                 <li class="page-scroll">
-                    <a href="#forms">Log in</a>
+                    <a href="#forms">Увійти</a>
                 </li>
 
                 <li class="page-scroll">
-                    <a href="#forms">Sign up</a>
+                    <a href="#forms">Зареєструватись</a>
                 </li>
             </ul>
         </div>
@@ -39,19 +39,14 @@
                         <h1>Conspectus Patronum</h1>
                     </div>
                     <div class="intro-text text-center">
-                        <h2>Get your notes classified.</h2>
+                        <h2>Зручний додаток для ведення електронного конспекту</h2>
                     </div>
                 </div>
             </div>
             <div class="row page-scroll">
-                <div class="col-md-3"></div>
-                <div class="col-md-3">
-                    <a role="button" class="pull-right" href="#forms">Sign in</a>
+                <div class="col-md-12 text-center">
+                    <h1 class="glyphicon glyphicon-menu-down"></h1>
                 </div>
-                <div class="col-md-3">
-                    <a role="button" class="pull-left" href="#forms">Sign up</a>
-                </div>
-                <div class="col-md-3"></div>
             </div>
         </div>
     </div>
@@ -60,23 +55,23 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 with-sign-in text-center">
-                <h3>Sign in with existing account</h3>
+                <h3>Увійти</h3>
                 <form class="center-block">
                     <fieldset>
-                        <input type="text" name="login" placeholder="Nickname" mg-model="vmLanding.nickname"><br>
-                        <input type="password" name="password" placeholder="Password" ng-model="vmLanding.password"><br>
-                        <input type="button" ng-click="vmLanding.logIn()" value="Sign in" ng-click="vmLanding.logIn()">
+                        <input type="text" name="login" placeholder="Нікнейм" mg-model="vmLanding.nickname"><br>
+                        <input type="password" name="password" placeholder="Пароль" ng-model="vmLanding.password"><br>
+                        <input type="button" ng-click="vmLanding.logIn()" value="Увійти" ng-click="vmLanding.logIn()">
                     </fieldset>
                 </form>
             </div>
             <div class="col-md-6 with-sign-up text-center">
-                <h3>Not registered yet?</h3>
+                <h3>Що не зареєстрований?</h3>
                 <form class="center-block" ng-submit="vmLanding.register()">
                     <fieldset>
-                        <input type="text" name="login" placeholder="Nickname" ng-model="vmLanding.user.name"><br>
-                        <input type="password" name="pass" placeholder="Password"><br>
-                        <input type="password" name="confirm_password_reg" placeholder="Confirm the password"><br>
-                        <input type="submit" value="Sign up">
+                        <input type="text" name="login" placeholder="Нікнейм" ng-model="vmLanding.user.name"><br>
+                        <input type="password" name="pass" placeholder="Пароль"><br>
+                        <input type="password" name="confirm_password_reg" placeholder="Підтверди пароль"><br>
+                        <input type="submit" value="Зареєструватись">
                     </fieldset>
                 </form>
             </div>

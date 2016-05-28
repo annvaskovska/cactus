@@ -20,7 +20,7 @@
         delete window.faker;
         delete window.Trello;
         delete window.jQuery;
-        delete window.$;//jshint ignore:line
+        //delete window.$;//jshint ignore:line
         delete window.d3;
 
         if ($logProvider.debugEnabled) {
