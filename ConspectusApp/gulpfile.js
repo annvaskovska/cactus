@@ -354,8 +354,6 @@ gulp.task('autotest', function(done) {
  * --nosync
  */
 gulp.task('serve-dev', ['inject'], function() {
-    mongo(config.mongodbPath);
-    console.log('\x1b[36m', 'Running mongodb on ' + config.mongodbPath,'\x1b[0m');
     serve('dev' /*currentEnv*/);
 });
 

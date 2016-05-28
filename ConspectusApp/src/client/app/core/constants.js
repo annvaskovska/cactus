@@ -2,8 +2,6 @@
 (function() {
     //'use strict';
 
-    //if (typeof Trello == 'undefined') Trello = {authorized: function() {return true;}}; // jshint ignore:line
-
     angular
         .module('app.core')
         .constant('moment', moment)
