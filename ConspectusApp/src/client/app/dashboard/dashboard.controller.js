@@ -90,54 +90,9 @@
                         vmModal.color = '#00F';
                         vmModal.version = 30;
                         vmModal.undo =  function(){
-                            vm.version--;
+                            vmModal.version--;
                         };
                         vmModal.dismiss = modalCreateProject.dismiss;
-
-                        vmModal.outputBacklogList = vmModal.backlogLists;
-                        vmModal.outputWorkingList = vmModal.workingLists;
-
-                        // Function creates Project and Trello Organization
-                        function createProjAndOrg() {
-                            var projectName = vmModal.projectName;
-
-
-                            if (projectName !== '')
-                                createOrganization(projectName);
-                            else logger.error('Please fill the project name.');
-
-                            function createOrganization(projectName) {
-                                var sendData = {
-                                    title: projectName
-                                };
-                                $http.put(apiUrl.host + vm.user.tocken, sendData).then(
-                                    function () {
-                                        $http.get(apiUrl.host + vm.user.tocken)
-                                            .then(function (res) {
-                                                user.subjects = res.data.subjects;
-                                                $uibModalInstance.dismiss();
-                                            })
-                                    }
-                                )
-                            }
-                        }
-
-                        function changeModal() {
-                            modalCreateProject.dismiss();
-
-                            var modalProjectCreated = $uibModal.open({
-                                templateUrl: 'app/layout/project-added.html',
-                                controller: function () {
-
-                                    var vmSidebarModal = this;
-
-                                    vmSidebarModal.exit = function () {
-                                        modalProjectCreated.dismiss();
-                                    };
-                                },
-                                controllerAs: 'vmSidebarModal'
-                            });
-                        }
                     },
                     controllerAs: 'vmModal'
                 }
