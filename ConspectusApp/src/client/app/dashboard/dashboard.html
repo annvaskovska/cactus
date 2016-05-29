@@ -15,8 +15,8 @@
                     <!--{{vmDashboard.onlineStatus ? 'off' : 'on' }}-->
                     <!--</button>-->
                     <!--</div>-->
-                    <div class="col-sm-3 info-tab-item">
-                        <p class="text-center">Наразі працюю
+                    <div class="col-sm-1 info-tab-item">
+                        <p class="text-center">
                             <span class="online"> ОНЛАЙН </span>
                         </p>
                     </div>
@@ -26,13 +26,18 @@
                         </p>
                     </div>
                     <div class="col-sm-2 info-tab-item">
+                        <p class="text-center export-btn" ng-click="vmDashboard.addSound()">
+                            <a><i class="glyphicon glyphicon-music"></i>ЗАПИСАТИ АУДІО</a>
+                        </p>
+                    </div>
+                    <div class="col-sm-2 info-tab-item">
                         <p class="text-center export-btn">
                             <a><i class="fa fa-file"></i>ЕКСПОРТ В PDF</a>
                         </p>
                     </div>
                     <div class="col-sm-2 info-tab-item">
                         <p class="text-center save-btn" ng-click="vmDashboard.saveChanges()">
-                            <i class="fa fa-floppy-o"></i><span>ЗБЕРЕГТИ ЗМІНИ</span>
+                            <i class="glyphicon glyphicon-save"></i><span>ЗБЕРЕГТИ ЗМІНИ</span>
                         </p>
                     </div>
                     <div class="col-sm-2 info-tab-item">

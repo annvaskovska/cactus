@@ -11,6 +11,7 @@
     function DashboardController($q, logger, $http, apiUrl, $scope, user, $uibModal) {
         var vm = this;
         vm.addPicture = addPicture;
+        vm.addSound = addSound;
         vm.onlineStatus = 1;
         vm.saveChanges = saveChanges;
         vm.deleteLecture = deleteLecture;
@@ -92,6 +93,21 @@
                         vmModal.undo =  function(){
                             vmModal.version--;
                         };
+                        vmModal.dismiss = modalCreateProject.dismiss;
+                    },
+                    controllerAs: 'vmModal'
+                }
+            );
+        }
+
+        function addSound() {
+            var modalCreateProject = $uibModal.open({
+                    templateUrl: 'app/dashboard/add-sound.html',
+                    size: 'lg',
+                    controller: function ($uibModalInstance) {
+
+                        var vmModal = this;
+
                         vmModal.dismiss = modalCreateProject.dismiss;
                     },
                     controllerAs: 'vmModal'

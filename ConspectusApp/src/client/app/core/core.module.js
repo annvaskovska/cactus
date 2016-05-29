@@ -5,6 +5,6 @@
         .module('app.core', [
             'ngAnimate', 'ngSanitize', 'ngResource', 'app.charts',
             'blocks.exception', 'blocks.logger', 'blocks.router',
-            'ui.router', 'ngplus', 'ui.bootstrap', 'textAngular', 'pw.canvas-painter'
+            'ui.router', 'ngplus', 'ui.bootstrap', 'textAngular', 'pw.canvas-painter', 'angularAudioRecorder'
         ]);
 })();

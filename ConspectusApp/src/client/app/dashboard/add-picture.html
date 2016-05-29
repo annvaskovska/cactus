@@ -3,14 +3,14 @@
         <div class="modal-body">
             <div
                 pw-color-selector="['#000', '#9CB199', '#CF3759', '#485247', '#E77547', '#D38E47', '#0A6A74', '#153974']"
-                color="vmDashboard.color"></div>
+                color="vmModal.color"></div>
             <div class="undo">
                 <button ng-click="vmModal.undo()"
                         ng-disabled="vmModal.version < 1">Відмінити
                 </button>
             </div>
-            <div pw-canvas options="{width: 560, height: 380, color: vmDashboard.color,
-                                                lineWidth: 1, undo: true}" version="vmDashboard.version"></div>
+            <div pw-canvas options="{width: 560, height: 380, color: vmModal.color,
+                                                lineWidth: 1, undo: true}" version="vmModal.version"></div>
         </div>
     </div>
     <div class="modal-footer">
