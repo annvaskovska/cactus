@@ -14,8 +14,7 @@
                     </h3>
 
                     <div class="alert alert-danger" ng-if="recorder.status.isDenied === true">
-                        Permission to use your microphone was declined, please refresh this page to grant
-                        permission.
+                        Дозвіл на використання мікрофона був відхилений, будь ласка, поновіть цю сторінку, щоб надати дозвіл.
                     </div>
 
                     <div class="controls text-center" style="padding-top: 10px;"
@@ -72,4 +71,18 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal-footer">
+    <button
+        class="btn btn-default"
+        ng-click="vmModal.dismiss()">
+        Відмінити
+    </button>
+    <button
+        class="btn btn-success"
+        id="btnCreateProject"
+        ng-click="vmModal.createProjAndOrgLecture()"
+        ng-disabled="!addProjectForm.$valid">
+        Додати
+    </button>
 </div>

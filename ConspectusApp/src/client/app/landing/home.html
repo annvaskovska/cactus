@@ -56,20 +56,26 @@
         <div class="row">
             <div class="col-md-6 with-sign-in text-center">
                 <h3>Увійти</h3>
-                <form class="center-block">
+                <form novalidate name='signin' class="center-block">
                     <fieldset>
-                        <input type="text" name="login" placeholder="Нікнейм" mg-model="vmLanding.nickname"><br>
-                        <input type="password" name="password" placeholder="Пароль" ng-model="vmLanding.password"><br>
+                        <input type="text" name="login" placeholder="Нікнейм" mg-model="vmLanding.nickname">
+                        <br>
+                        <input type="password" name="password" placeholder="Пароль" ng-model="vmLanding.password"
+                        ng-minlength="8"
+                        uib-popover="Невірний пароль" popover-trigger="click"  popover-placement='right'>
+                        <br>
                         <input type="button" ng-click="vmLanding.logIn()" value="Увійти" ng-click="vmLanding.logIn()">
                     </fieldset>
                 </form>
             </div>
             <div class="col-md-6 with-sign-up text-center">
                 <h3>Що не зареєстрований?</h3>
-                <form class="center-block" ng-submit="vmLanding.register()">
+                <form novalidate name='sighup' class="center-block" ng-submit="vmLanding.register()">
                     <fieldset>
                         <input type="text" name="login" placeholder="Нікнейм" ng-model="vmLanding.user.name"><br>
-                        <input type="password" name="pass" placeholder="Пароль"><br>
+                        <input type="password" name="pass" placeholder="Пароль" ng-model="vmLanding.user.pass"
+                               ng-minlength="8"
+                               uib-popover="Пароль має містити не менше 8 символів" popover-trigger="click"  popover-placement='right'><br>
                         <input type="password" name="confirm_password_reg" placeholder="Підтверди пароль"><br>
                         <input type="submit" value="Зареєструватись">
                     </fieldset>
